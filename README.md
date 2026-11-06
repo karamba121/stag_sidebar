@@ -8,7 +8,7 @@ Adicione ao `pubspec.yaml` do seu projeto:
 
 ```yaml
 dependencies:
-  stag_sidebar: ^0.1.0
+  stag_sidebar: ^0.2.0
 ```
 
 ## Uso
@@ -39,6 +39,22 @@ StagSidebar(
 ```
 
 Personalize as cores, tipografia, espaçamentos, dimensões, cantos, gradiente ativo e animação com `StagSidebarStyle`. Cada grupo pode receber sua própria cor de fundo e espaçamento; cada item pode sobrescrever seu gradiente ou cor selecionada. `initiallyCollapsed` define o estado inicial e `onCollapsedChanged` informa quando a pessoa alterna o modo compacto. No modo compacto, os atalhos aparecem em uma faixa horizontal ao passar o mouse ou tocar no botão de ações. Em telas estreitas ou com muitos atalhos, a faixa permite rolagem horizontal.
+
+## Tema claro
+
+Use `StagSidebarStyle.light()` para aplicar a paleta clara. Assim como no estilo padrão, todas as propriedades podem ser personalizadas:
+
+```dart
+StagSidebar(
+  style: const StagSidebarStyle.light(
+    accentColor: Colors.teal,
+    borderRadius: 16,
+  ),
+  sections: const [], // Adicione seus itens de navegação.
+)
+```
+
+Para alternar os temas, atualize `style` para `const StagSidebarStyle.light()` ou `const StagSidebarStyle()` no estado do seu aplicativo. O exemplo incluído demonstra essa troca.
 
 A transição respeita a preferência do sistema por movimento reduzido. A sidebar usa a altura disponível e permite rolagem quando o conteúdo não cabe; forneça largura suficiente para `expandedWidth` e `collapsedWidth` no layout que a contém. Em celulares, `initiallyCollapsed: true` inicia a sidebar no modo compacto, se desejado.
 

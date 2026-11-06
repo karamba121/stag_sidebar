@@ -4,6 +4,82 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:stag_sidebar/stag_sidebar.dart';
 
 void main() {
+  testWidgets(
+      'light theme supports customization and preserves navigation state',
+      (tester) async {
+    const lightStyle = StagSidebarStyle.light(
+      backgroundColor: Color(0xFFF1F8F8),
+      selectedBackgroundColor: Color(0xFF005B60),
+      selectedGradient: null,
+      submenuBackgroundColor: Color(0xFFE4F0F0),
+      itemHeight: 44,
+    );
+    var light = true;
+    var actionCalls = 0;
+    final selections = <String>[];
+    late StateSetter updateTheme;
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: Row(children: [
+      StatefulBuilder(builder: (context, setState) {
+        updateTheme = setState;
+        return StagSidebar(
+          style: light ? lightStyle : const StagSidebarStyle(),
+          selectedId: 'child',
+          onItemSelected: selections.add,
+          actions: [
+            StagSidebarAction(
+                label: 'Share',
+                icon: Icons.share,
+                onPressed: () => actionCalls++)
+          ],
+          sections: const [
+            StagSidebarSection(items: [
+              StagSidebarItem(
+                  id: 'menu',
+                  label: 'Menu',
+                  icon: Icons.menu,
+                  initiallyExpanded: true,
+                  children: [
+                    StagSidebarItem(
+                        id: 'child', label: 'Child', icon: Icons.star),
+                  ]),
+            ])
+          ],
+        );
+      }),
+      const Expanded(child: SizedBox()),
+    ]))));
+    await tester.pumpAndSettle();
+    expect(
+        find.byWidgetPredicate((widget) =>
+            widget is Container &&
+            widget.decoration is BoxDecoration &&
+            (widget.decoration! as BoxDecoration).color ==
+                lightStyle.backgroundColor),
+        findsOneWidget);
+    expect(lightStyle.selectedGradient, isNull);
+    expect(lightStyle.itemHeight, 44);
+    expect(find.text('Child').hitTestable(), findsOneWidget);
+    await tester.tap(find.text('Child'));
+    await tester.pumpAndSettle();
+    expect(selections, ['child']);
+    updateTheme(() => light = false);
+    await tester.pumpAndSettle();
+    expect(find.text('Child').hitTestable(), findsOneWidget);
+    updateTheme(() => light = true);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Collapse sidebar'));
+    await tester.pumpAndSettle();
+    expect(find.byTooltip('Child').hitTestable(), findsOneWidget);
+    await tester.tap(find.byTooltip('More actions'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Share'));
+    await tester.pumpAndSettle();
+    expect(actionCalls, 1);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('submenu toggles, selects children and works in compact mode',
       (tester) async {
     await tester.binding.setSurfaceSize(const Size(320, 640));

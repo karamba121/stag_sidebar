@@ -768,6 +768,53 @@ class StagSidebarStyle {
     this.animationDuration = const Duration(milliseconds: 180),
   });
 
+  /// A light palette with the same customizable properties as the default style.
+  const StagSidebarStyle.light({
+    this.backgroundColor = const Color(0xFFF8FCFD),
+    this.textColor = const Color(0xFF405B66),
+    this.iconColor = const Color(0xFF5D7882),
+    this.selectedTextColor = Colors.white,
+    this.selectedIconBackgroundColor = const Color(0x33FFFFFF),
+    this.submenuBackgroundColor = const Color(0xFFE9F3F4),
+    this.submenuPadding = 6,
+    this.accentColor = const Color(0xFF087B80),
+    this.selectedBackgroundColor,
+    this.selectedGradient = const LinearGradient(
+      colors: [Color(0xFF087B6C), Color(0xFF086F92)],
+    ),
+    this.actionColor = const Color(0xFFEDF5F6),
+    this.actionIconColor = const Color(0xFF087487),
+    this.actionMenuColor = const Color(0xFFF8FCFD),
+    this.hoverColor = const Color(0x26348487),
+    this.borderColor = const Color(0xFFD0E2E6),
+    this.borderWidth = 1,
+    this.shadows = const [
+      BoxShadow(color: Color(0x33245462), blurRadius: 24, offset: Offset(0, 12))
+    ],
+    this.padding = const EdgeInsets.symmetric(vertical: 18, horizontal: 14),
+    this.collapsedHorizontalPadding = 8,
+    this.labelStyle,
+    this.selectedLabelStyle,
+    this.titleStyle = const TextStyle(
+      color: Color(0xFF193743),
+      fontWeight: FontWeight.w700,
+    ),
+    this.borderRadius = 18,
+    this.groupBorderRadius = 15,
+    this.itemBorderRadius = 14,
+    this.iconSize = 18,
+    this.itemHeight = 40,
+    this.itemPadding = 8,
+    this.headerSpacing = 18,
+    this.sectionSpacing = 14,
+    this.itemSpacing = 3,
+    this.actionSize = 32,
+    this.actionIconSize = 16,
+    this.actionSpacing = 6,
+    this.footerSpacing = 8,
+    this.animationDuration = const Duration(milliseconds: 180),
+  });
+
   final Color backgroundColor;
   final Color textColor;
   final Color iconColor;
