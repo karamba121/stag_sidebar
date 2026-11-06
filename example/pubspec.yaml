@@ -1,0 +1,19 @@
+name: stag_sidebar_example
+description: A visual example of the stag_sidebar package.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: '>=3.13.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  stag_sidebar:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
