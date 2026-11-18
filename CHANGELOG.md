@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Fix the collapse button when no Material ancestor is present.
+
 ## 0.2.0
 
 - Add a customizable light theme with `StagSidebarStyle.light`.

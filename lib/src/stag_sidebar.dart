@@ -397,36 +397,38 @@ class _StagSidebarState extends State<StagSidebar> {
       excludeSemantics: true,
       child: Tooltip(
           message: _collapsed ? widget.expandLabel : widget.collapseLabel,
-          child: InkWell(
-            onTap: _toggleCollapsed,
-            borderRadius: BorderRadius.circular(style.itemBorderRadius),
-            hoverColor: style.hoverColor,
-            child: SizedBox(
-              height: style.itemHeight,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: style.itemPadding * progress),
-                child: _animatedRow(
-                  progress: progress,
-                  iconWidth: style.iconSize,
-                  icon: Icon(
-                    _collapsed ? widget.expandIcon : widget.collapseIcon,
-                    size: style.iconSize,
-                    color: style.accentColor,
-                  ),
-                  label: Text(
-                    widget.collapseLabel,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: (style.labelStyle ??
-                            Theme.of(context).textTheme.labelMedium ??
-                            const TextStyle())
-                        .copyWith(color: style.textColor),
+          child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+                onTap: _toggleCollapsed,
+                borderRadius: BorderRadius.circular(style.itemBorderRadius),
+                hoverColor: style.hoverColor,
+                child: SizedBox(
+                  height: style.itemHeight,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: style.itemPadding * progress),
+                    child: _animatedRow(
+                      progress: progress,
+                      iconWidth: style.iconSize,
+                      icon: Icon(
+                        _collapsed ? widget.expandIcon : widget.collapseIcon,
+                        size: style.iconSize,
+                        color: style.accentColor,
+                      ),
+                      label: Text(
+                        widget.collapseLabel,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: (style.labelStyle ??
+                                Theme.of(context).textTheme.labelMedium ??
+                                const TextStyle())
+                            .copyWith(color: style.textColor),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )),
+              ))),
     );
   }
 

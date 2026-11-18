@@ -1,9 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:stag_sidebar/stag_sidebar.dart';
 
 void main() {
+  testWidgets('toggle works without an ancestor Material', (tester) async {
+    final changes = <bool>[];
+    final semantics = tester.ensureSemantics();
+    await tester.pumpWidget(MaterialApp(
+      home: Align(
+          alignment: Alignment.centerLeft,
+          child: StagSidebar(
+            sections: const [],
+            onCollapsedChanged: changes.add,
+          )),
+    ));
+    expect(tester.takeException(), isNull);
+    expect(
+        tester.getSemantics(find.bySemanticsLabel('Collapse sidebar')),
+        matchesSemantics(
+            label: 'Collapse sidebar', isButton: true, hasTapAction: true));
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    expect(changes, [true]);
+    expect(tester.getSize(find.byType(StagSidebar)).width, closeTo(64, .1));
+    expect(find.byTooltip('Expand sidebar'), findsOneWidget);
+    await tester.tap(find.byTooltip('Expand sidebar'));
+    await tester.pumpAndSettle();
+    expect(changes, [true, false]);
+    expect(tester.getSize(find.byType(StagSidebar)).width, closeTo(210, .1));
+    expect(tester.takeException(), isNull);
+    semantics.dispose();
+  });
+
+  testWidgets('toggle works inside a Drawer', (tester) async {
+    final changes = <bool>[];
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(),
+        drawer: Drawer(
+            child: StagSidebar(
+          initiallyCollapsed: true,
+          sections: const [],
+          onCollapsedChanged: changes.add,
+        )),
+      ),
+    ));
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Expand sidebar'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Collapse sidebar'));
+    await tester.pumpAndSettle();
+    expect(changes, [false, true]);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
       'light theme supports customization and preserves navigation state',
       (tester) async {
