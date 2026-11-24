@@ -1,3 +1,7 @@
+## 0.2.3
+
+- Add screenshots of the integration example to the README.
+
 ## 0.2.2
 
 - Update the documentation and add an integration example with `stag_appbar`.

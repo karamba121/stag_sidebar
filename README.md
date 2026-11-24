@@ -8,13 +8,21 @@ The image below shows the design that inspired the sidebar, including its expand
 
 ![Visual reference of the sidebar in expanded and compact modes](assets/original-e6b2332094aad1caa8469b4730300dbe.webp)
 
+### Example screenshots
+
+The integration example combines the sidebar and app bar in different layouts and themes:
+
+| Dark theme, expanded sidebar | Light theme, compact sidebar | Light theme, app bar above sidebar |
+| --- | --- | --- |
+| ![Dark theme with the app bar beside the expanded sidebar](assets/image.png) | ![Light theme with the app bar beside the compact sidebar](assets/image-1.png) | ![Light theme with the app bar above the compact sidebar](assets/image-2.png) |
+
 ## Installation
 
 Add this to your project's `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  stag_sidebar: ^0.2.1
+  stag_sidebar: ^0.2.3
 ```
 
 For a matching app bar, consider the companion `stag_appbar` package. It is
@@ -23,7 +31,7 @@ is not yet published, add it from a local checkout:
 
 ```yaml
 dependencies:
-  stag_sidebar: ^0.2.1
+  stag_sidebar: ^0.2.3
   stag_appbar:
     path: ../stag_appbar # Adjust to your checkout's location.
 ```
