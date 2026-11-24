@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Update the documentation and add an integration example with `stag_appbar`.
+
 ## 0.2.1
 
 - Fix the collapse button when no Material ancestor is present.

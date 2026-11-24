@@ -2,7 +2,7 @@ name: stag_sidebar
 description: A customizable Flutter sidebar with light and dark themes and compact mode.
 homepage: https://github.com/karamba121/stag_sidebar
 repository: https://github.com/karamba121/stag_sidebar
-version: 0.2.1
+version: 0.2.2
 environment:
   sdk: '>=3.3.0 <4.0.0'
   flutter: '>=3.19.0'
