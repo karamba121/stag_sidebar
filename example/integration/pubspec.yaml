@@ -1,0 +1,24 @@
+name: stag_sidebar_integration_example
+description: Example of stag_sidebar and stag_appbar together.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.19.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  stag_sidebar:
+    path: ../..
+  stag_appbar:
+    path: ../../../stag_appbar
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
